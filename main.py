@@ -3,10 +3,13 @@ import csv
 import re
 import sys
 
-f = open("input.txt","r")
-if len(sys.argv)>1: s = sys.argv[1]
-#else: s = "the quick brown fox jumps over the lazy dog."
-else: s = f.read()
+infile = "input.txt"
+lexfile = "lexicon.csv"
+
+if len(sys.argv)>1: infile = sys.argv[1]
+if len(sys.argv)>2: lexfile = sys.argv[2]
+f = open(infile,"r")
+s = f.read()
 
 # Splits the input string by spaces and punctuation and creates a list
 #containing each individual word.
@@ -17,7 +20,7 @@ wordlist = []
 polarity = []
 
 #Adds the first value of each row of the csv to a list
-with open('lexicon.csv', 'rb') as f:
+with open(lexfile, 'rb') as f:
     reader = csv.reader(f)
     for row in reader:
         if not row[0] in wordlist:
