@@ -28,15 +28,18 @@ with open(lexfile, 'rb') as f:
             polarity.append(row[1])
 
 #Sorts the csv list by descending length
-wordlist.sort(key=lambda x:len(x[0]), reverse=True)
-print wordlist
-flags = 0.0
+#wordlist.sort(key=lambda x:len(x[0]), reverse=True)
+
+poswords = 0.0
+negwords = 0.0
 for i in range (len(wordsplit)):
-    print "Current word:"+wordsplit[i]
     if wordsplit[i] in wordlist:
         print "Found: "+wordsplit[i]+"!"
-        flags+=1
+        print polarity[wordlist.index(wordsplit[i])]
+        if polarity[wordlist.index(wordsplit[i])] == "positive":
+            poswords += 1
+        elif polarity[wordlist.index(wordsplit[i])] == "negative":
+            negwords += 1
 
-print(flags)
-
-print("The overall flags percentage is "+str((flags/len(wordsplit))*100)+"%")
+print "POSITIVE WORDS: "+str(poswords)
+print "NEGATIVE WORDS: "+str(negwords)
